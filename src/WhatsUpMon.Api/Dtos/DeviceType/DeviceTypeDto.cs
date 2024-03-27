@@ -18,6 +18,6 @@ namespace WhatsUpMon.Api.Dtos
         public string Name { get; set; } = string.Empty;
 
         // We may or may not want to expose the Devices list here. ?
-        public List<Device> Devices { get; set; } = new List<Device>();
+        // public List<Device> Devices { get; set; } = new List<Device>();
     }
 }

@@ -19,7 +19,7 @@ namespace WhatsUpMon.Api.Mappers
                 // We can now add/remove/modify fields as needed to be returned to the client
                 DeviceTypeId = devicetypeModel.DeviceTypeId,
                 Name = devicetypeModel.Name,
-                Devices = devicetypeModel.Devices
+                // Devices = devicetypeModel.Devices
             };
         }
         // This Dto is used when posting a new DeviceType to the server.

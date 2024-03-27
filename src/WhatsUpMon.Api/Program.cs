@@ -50,16 +50,6 @@ else
     }
 }
 
-// builder.Services.AddDbContext<ApplicationDBContext>(options =>
-//     options.UseMySql(builder.Configuration.GetConnectionString("WhatsUpMonDatabase"),
-//     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("WhatsUpMonDatabase"))));
-
-
-
-
-
-
-
 // Configure Kestrel (web server) to listen on port 4200 with HTTP
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
@@ -72,13 +62,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceTypeRepository, DeviceTypeRepository>();
 
-var app = builder.Build();
-// Configure the HTTP request pipeline.
 
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+// We may want to use swagger in production for our API documentation ??
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -86,9 +78,8 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    // app.UseExceptionHandler("/error");  // We are using our own exception handling middleware
+    // app.UseExceptionHandler("/error");  // This is a built in, we are using our own exception handling middleware
     app.UseMiddleware<ExceptionHandlingMiddleware>();   // Exception handling should be one of the first middleware registered
-
 }
 
 // Not needed since we're not using HTTPS
@@ -98,7 +89,3 @@ app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
