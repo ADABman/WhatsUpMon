@@ -11,11 +11,11 @@ using WhatsUpMon.Api.Repository;
 namespace WhatsUpMon.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // Or [Route("api/device")]
+    [Route("api/[controller]")] // Or [Route("api/device")]
     public class DeviceController : ControllerBase
     {
         private readonly IDeviceRepository _deviceRepo;
-        public DeviceController(DeviceRepository deviceRepo)
+        public DeviceController(IDeviceRepository deviceRepo)
         {
             _deviceRepo = deviceRepo;
         }
